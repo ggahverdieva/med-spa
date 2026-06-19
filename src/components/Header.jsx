@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from '../router'
 
 const s = { fill: 'none', stroke: '#03A6C3', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }
 const icons = {
@@ -10,11 +11,11 @@ const icons = {
 }
 
 const links = [
-  ['#services', 'Treatments', 'treat'],
-  ['#spotlight', 'Skin', 'skin'],
-  ['#memberships', 'Membership', 'member'],
-  ['#results', 'Results', 'results'],
-  ['#contact', 'Visit', 'visit'],
+  ['/#services', 'Treatments', 'treat'],
+  ['/#spotlight', 'Skin', 'skin'],
+  ['/#memberships', 'Membership', 'member'],
+  ['/#results', 'Results', 'results'],
+  ['/#contact', 'Visit', 'visit'],
 ]
 
 export default function Header({ onBook }) {
@@ -26,9 +27,9 @@ export default function Header({ onBook }) {
       </div>
       <nav className="nav">
         <div className="nav-inner">
-          <a href="#top" className="nav-logo"><img src="/assets/SRQLOGO.png" alt="SRQ Med Spa" /></a>
+          <Link to="/" className="nav-logo"><img src="/assets/SRQLOGO.png" alt="SRQ Med Spa" /></Link>
           <div className="nav-links">
-            {links.map(([h, l]) => <a key={h} href={h}>{l}</a>)}
+            {links.map(([h, l]) => <Link key={h} to={h}>{l}</Link>)}
           </div>
           <div className="nav-right">
             <a href="tel:941-779-3004" className="nav-phone">941·779·3004</a>
@@ -41,9 +42,9 @@ export default function Header({ onBook }) {
         <div className={`nav-mobile ${open ? 'open' : ''}`}>
           <div className="nav-mobile-inner">
             {links.map(([h, l, k]) => (
-              <a key={h} href={h} onClick={() => setOpen(false)}>
+              <Link key={h} to={h} onClick={() => setOpen(false)}>
                 <span className="mm-ic">{icons[k]}</span>{l}
-              </a>
+              </Link>
             ))}
             <a href="tel:941-779-3004" onClick={() => setOpen(false)}>
               <span className="mm-ic">

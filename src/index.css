@@ -259,6 +259,117 @@ a { color: inherit; text-decoration: none; }
 .footer-copy { font-size: 12.5px; color: var(--gray2); }
 
 /* ============================================================
+   MEDICAL WEIGHT LOSS — SERVICE PAGE
+   Built on the homepage design system: it reuses the hero,
+   welcome, spotlight, testimonials, membership and value-strip
+   patterns, adding only the bits unique to this page.
+   ============================================================ */
+.wl { background: #fff; }
+
+/* let the grid fr-tracks win over a child's min-content (long placeholder
+   labels would otherwise blow out a column and squeeze the text) */
+.wl-hero-inner > *,
+.wl .welcome-grid > *,
+.wl .spotlight-grid > *,
+.wl-feature-grid > * { min-width: 0; }
+.ph .lbl { max-width: 100%; }
+
+/* image / video placeholders the client drops real assets into later */
+.ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 28px; color: var(--gray2); background: linear-gradient(135deg, rgba(3,166,195,0.07), rgba(205,162,50,0.08)); border: 2px dashed #cfd4dc; border-radius: 22px; min-height: 220px; }
+.ph .lbl { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+.ph-arch { border-radius: 280px 280px 24px 24px; }
+.ph-archb { border-radius: 24px 24px 200px 200px; box-shadow: 0 40px 90px rgba(0,0,0,0.18); }
+.ph-rounded { border-radius: 24px; }
+.ph-video { aspect-ratio: 16 / 9; min-height: 0; width: 100%; }
+
+/* embedded YouTube videos, framed like the page's rounded media */
+.wl-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 24px; overflow: hidden; background: #000; box-shadow: 0 30px 70px rgba(29,29,31,0.16); }
+.wl-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+
+/* hero — mirrors the homepage hero */
+.wl-hero { position: relative; overflow: hidden; background: linear-gradient(180deg,#fff 0%,var(--bg) 100%); border-bottom: 1px solid var(--line2); }
+.wl-hero-inner { position: relative; max-width: var(--maxw); margin: 0 auto; padding: 52px var(--pad) 84px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+.wl-crumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); margin-bottom: 20px; font-weight: 600; }
+.wl-crumb a { color: var(--teal); }
+.wl-crumb a:hover { text-decoration: underline; }
+.wl-hero h1 { font-weight: 800; font-size: 60px; line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 0; }
+.wl-hero h1 .teal { color: var(--teal); }
+.wl-sub { font-size: 22px; font-weight: 700; color: var(--gold); margin: 18px 0 0; }
+.wl-lead { font-size: 18px; line-height: 1.6; color: var(--gray); margin: 22px 0 0; max-width: 470px; }
+.wl-actions { display: flex; gap: 18px; align-items: center; margin-top: 34px; flex-wrap: wrap; }
+.wl-buys { gap: 14px; }
+.wl-hero .hero-media { position: relative; }
+
+/* spotlight section punch lines (white text on the teal gradient) */
+.wl-punch { font-size: 19px; font-weight: 800; color: #fff; margin: 22px 0 0; }
+.wl-spot-p { color: #d9f1f6; font-size: 16px; margin: 14px 0 0; }
+.wl-spot-ask { color: #fff; font-weight: 700; font-size: 17px; margin: 14px 0 28px; }
+
+/* treatments — zigzag feature blocks (welcome/spotlight DNA) */
+.wl-menu-head { background: #fff; padding: 96px var(--pad) 0; }
+.wl-feature { background: #fff; padding: 88px var(--pad); }
+.wl-feature.alt { background: var(--bg); }
+.wl-feature-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 60px; align-items: start; }
+.wl-feature-grid.flip .wl-feature-media { order: 2; }
+.wl-feature-media { position: sticky; top: 90px; }
+.wl-feature-media .ph { min-height: 440px; }
+.wl-feature-body .eyebrow { margin-bottom: 0; }
+.wl-feature-body h2 { font-weight: 800; font-size: 38px; line-height: 1.14; letter-spacing: -0.025em; margin: 16px 0 0; }
+.wl-feature-body p { font-size: 16.5px; line-height: 1.75; color: var(--gray); margin: 18px 0 0; }
+.wl-feature-body p strong { color: var(--ink); }
+.wl-feature-body a { color: var(--teal); font-weight: 600; }
+.wl-feature-body a:hover { text-decoration: underline; }
+
+/* gold ✦ bullets — matches .wp / .spot-row */
+.wl-bullets { list-style: none; margin: 22px 0 0; padding: 0; }
+.wl-bullets li { position: relative; padding-left: 30px; margin-top: 16px; font-size: 16px; line-height: 1.7; color: var(--gray); }
+.wl-bullets li::before { content: '✦'; position: absolute; left: 2px; top: 1px; color: var(--gold); font-size: 16px; }
+.wl-bullets li strong { color: var(--ink); }
+
+/* pricing card */
+.wl-pricebox { margin-top: 30px; border: 1px solid var(--line); border-radius: 20px; padding: 28px 30px; background: #fff; box-shadow: 0 16px 44px rgba(29,29,31,0.06); }
+.wl-pricebox .pb-note { font-size: 14.5px; line-height: 1.6; color: var(--gray); margin: 0; }
+.wl-pricelist { list-style: none; margin: 18px 0 0; padding: 0; }
+.wl-pricelist li { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; padding: 13px 0; border-bottom: 1px solid var(--line2); }
+.wl-pricelist li:first-child { padding-top: 0; }
+.wl-pricelist li:last-child { border-bottom: none; padding-bottom: 0; }
+.wl-pricelist .dose { font-weight: 700; font-size: 15.5px; color: var(--ink); }
+.wl-pricelist .amt { font-weight: 800; font-size: 15.5px; color: var(--teal-deep); text-align: right; }
+
+/* closing — value-strip style */
+.wl-close { background: #fff; padding: 96px var(--pad) 100px; }
+.wl-close .services-head { max-width: 680px; margin: 0 auto; text-align: center; }
+.wl-close .services-head p { font-size: 17px; line-height: 1.6; color: var(--gray); margin: 18px auto 0; max-width: 560px; }
+.wl-close-grid { margin-top: 56px; }
+.wl-close-cta { display: flex; gap: 20px; align-items: center; justify-content: center; margin-top: 54px; flex-wrap: wrap; }
+
+@media (max-width: 1080px) {
+  .wl-hero h1 { font-size: 50px; }
+  .wl-feature-body h2 { font-size: 32px; }
+}
+@media (max-width: 900px) {
+  .wl-hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 40px var(--pad) 56px; }
+  .wl-hero .hero-media { order: -1; }
+  .wl-menu-head { padding: 64px var(--pad) 0; }
+  .wl-feature { padding: 60px var(--pad); }
+  .wl-feature-grid, .wl-feature-grid.flip { grid-template-columns: 1fr; gap: 36px; }
+  .wl-feature-grid.flip .wl-feature-media { order: -1; }
+  .wl-feature-media { position: static; }
+  .wl-feature-media .ph { min-height: 300px !important; }
+}
+@media (max-width: 560px) {
+  .wl-hero h1 { font-size: 34px; }
+  .wl-sub { font-size: 18px; }
+  .wl-feature-body h2 { font-size: 26px; }
+  .wl-feature-body p, .wl-bullets li { font-size: 15.5px; }
+  .wl-pricebox { padding: 22px 20px; }
+  .wl-pricelist li { flex-direction: column; gap: 2px; }
+  .wl-pricelist .amt { text-align: left; }
+  .wl-actions .btn-teal, .wl-actions .btn-gold, .wl-buys .btn-gold { width: 100%; text-align: center; }
+  .wl-close-cta { flex-direction: column; }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1080px) {

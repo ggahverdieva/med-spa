@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 
 // Reveal-on-scroll: fades + slides children in as they enter the viewport.
-export function useReveal() {
+// Pass a `dep` (e.g. the current route) to re-scan the DOM after a page change.
+export function useReveal(dep) {
   const ref = useRef(null)
   useEffect(() => {
     const root = ref.current || document
@@ -14,6 +15,6 @@ export function useReveal() {
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
     els.forEach(el => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [dep])
   return ref
 }

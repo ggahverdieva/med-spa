@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Link } from '../router'
 
 const i = { fill: 'none', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }
 
@@ -22,6 +23,7 @@ const cards = [
     img: 'card-weightloss.webp', cat: 'Metabolic · GLP-1', acc: 'gold', title: 'Medical Weight Loss',
     desc: 'Physician-guided semaglutide and vitamin programs tailored to your goals.',
     icon: <g><path d="M16 24h32l-3 28H19z" /><path d="M24 24c0-6 3-11 8-11s8 5 8 11" /><path d="M32 32v12M26 38h12" /></g>,
+    to: '/medical-weight-loss',
   },
   {
     img: 'card-sculpt.webp', cat: 'Contouring', acc: 'teal', title: 'Body Sculpting',
@@ -49,22 +51,36 @@ export default function Services() {
       </div>
 
       <div className="carousel" ref={ref} data-reveal>
-        {cards.map(c => (
-          <article className={`svc-card ${c.acc}-acc`} key={c.title}>
-            <div className="svc-arch"><img src={`/assets/${c.img}`} alt={c.title} /></div>
-            <div className="svc-body">
-              <div className="svc-cat">{c.cat}</div>
-              <div className="svc-titlerow">
-                <span className={`svc-ic ${c.acc}`}>
-                  <svg viewBox="0 0 64 64" width="22" height="22" stroke={c.acc === 'gold' ? '#CDA232' : '#03A6C3'} {...i}>{c.icon}</svg>
-                </span>
-                <h3>{c.title}</h3>
+        {cards.map(c => {
+          const body = (
+            <>
+              <div className="svc-arch"><img src={`/assets/${c.img}`} alt={c.title} /></div>
+              <div className="svc-body">
+                <div className="svc-cat">{c.cat}</div>
+                <div className="svc-titlerow">
+                  <span className={`svc-ic ${c.acc}`}>
+                    <svg viewBox="0 0 64 64" width="22" height="22" stroke={c.acc === 'gold' ? '#CDA232' : '#03A6C3'} {...i}>{c.icon}</svg>
+                  </span>
+                  <h3>{c.title}</h3>
+                </div>
+                <p>{c.desc}</p>
               </div>
-              <p>{c.desc}</p>
-            </div>
-            <a href="#contact" className="svc-plus">+</a>
-          </article>
-        ))}
+            </>
+          )
+          // Cards with `to` link to a dedicated service page — the whole card is
+          // clickable. The rest keep the in-page "+" jump to the contact section.
+          return c.to ? (
+            <Link to={c.to} className={`svc-card ${c.acc}-acc`} key={c.title}>
+              {body}
+              <span className="svc-plus">+</span>
+            </Link>
+          ) : (
+            <article className={`svc-card ${c.acc}-acc`} key={c.title}>
+              {body}
+              <a href="#contact" className="svc-plus">+</a>
+            </article>
+          )
+        })}
       </div>
 
       <div className="carousel-nav">
