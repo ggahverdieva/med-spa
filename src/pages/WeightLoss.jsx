@@ -1,22 +1,5 @@
 import { Link } from '../router'
 
-/* Empty image / video slots to drop real assets into later.
-   `className` picks the silhouette (ph-arch, ph-archb, ph-rounded, ph-video). */
-function Placeholder({ label = 'Image', className = '', style }) {
-  const video = className.includes('video')
-  return (
-    <div className={`ph ${className}`} style={style} aria-label={`${label} placeholder`}>
-      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor"
-           strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        {video
-          ? <><rect x="2" y="4" width="20" height="16" rx="3" /><path d="M10 9l5 3-5 3z" /></>
-          : <><rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1.6" /><path d="M21 15l-5-5L5 21" /></>}
-      </svg>
-      <span className="lbl">{label}</span>
-    </div>
-  )
-}
-
 /* Responsive 16:9 YouTube embed, framed to match the page's rounded media. */
 function Video({ id, title }) {
   return (
@@ -29,6 +12,15 @@ function Video({ id, title }) {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       />
+    </div>
+  )
+}
+
+/* Photo framed in the page's arched / rounded media shapes. */
+function Photo({ src, alt, className = '', style }) {
+  return (
+    <div className={`wl-photo ${className}`} style={style}>
+      <img src={src} alt={alt} loading="lazy" />
     </div>
   )
 }
@@ -75,7 +67,7 @@ export default function WeightLoss({ onBook }) {
             </div>
           </div>
           <div className="hero-media" data-reveal>
-            <Placeholder className="ph-arch" label="Hero image" style={{ height: 560 }} />
+            <Photo src="/assets/wl-hero.png" alt="Transform your body with effective weight loss strategies" className="arch" style={{ height: 560 }} />
             <div className="hero-float">
               <span className="ic">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 11c0 5.5-7 10-7 10z" /></svg>
@@ -134,7 +126,7 @@ export default function WeightLoss({ onBook }) {
             <button className="btn-gold" onClick={onBook}>Book your treatment</button>
           </div>
           <div data-reveal>
-            <Placeholder className="ph-archb" label="Transformation" style={{ height: 560 }} />
+            <Photo src="/assets/wl-ready.png" alt="Ready to lose weight and finally keep it off" className="archb" style={{ height: 560 }} />
           </div>
         </div>
       </section>
@@ -196,7 +188,7 @@ export default function WeightLoss({ onBook }) {
       <section className="wl-feature" id="semaglutide">
         <div className="wl-feature-grid">
           <div className="wl-feature-media" data-reveal>
-            <Placeholder className="ph-arch" label="Semaglutide" style={{ minHeight: 440 }} />
+            <Photo src="/assets/wl-semaglutide.png" alt="Prescription semaglutide weight loss strategy" className="arch" style={{ height: 460 }} />
           </div>
           <div className="wl-feature-body" data-reveal>
             <div className="eyebrow"><span className="bar" />GLP-1 Receptor Agonist</div>
@@ -238,7 +230,7 @@ export default function WeightLoss({ onBook }) {
       <section className="wl-feature alt" id="tirzepatide">
         <div className="wl-feature-grid flip">
           <div className="wl-feature-media" data-reveal>
-            <Placeholder className="ph-arch" label="Tirzepatide" style={{ minHeight: 440 }} />
+            <Photo src="/assets/wl-tirzepatide.png" alt="Prescription tirzepatide weight loss strategy" className="arch" style={{ height: 460 }} />
           </div>
           <div className="wl-feature-body" data-reveal>
             <div className="eyebrow"><span className="bar" />FDA-Approved · Dual Action</div>
@@ -277,7 +269,7 @@ export default function WeightLoss({ onBook }) {
       <section className="wl-feature" id="peptides">
         <div className="wl-feature-grid">
           <div className="wl-feature-media" data-reveal>
-            <Placeholder className="ph-arch" label="Peptides" style={{ minHeight: 440 }} />
+            <Photo src="/assets/wl-peptides.png" alt="Peptides for weight loss support" className="arch" style={{ height: 460 }} />
           </div>
           <div className="wl-feature-body" data-reveal>
             <div className="eyebrow"><span className="bar" />Amino Acids &amp; Peptides</div>
@@ -324,7 +316,7 @@ export default function WeightLoss({ onBook }) {
       <section className="wl-feature alt" id="skinny-shots">
         <div className="wl-feature-grid flip">
           <div className="wl-feature-media" data-reveal>
-            <Placeholder className="ph-arch" label="Lipo-Mino Skinny Shots" style={{ minHeight: 440 }} />
+            <Photo src="/assets/wl-lipo-mino.png" alt="Lipo-Mino Skinny Shots" className="arch" style={{ height: 460 }} />
           </div>
           <div className="wl-feature-body" data-reveal>
             <div className="eyebrow"><span className="bar" />Vitamins &amp; Metabolism</div>
@@ -371,7 +363,7 @@ export default function WeightLoss({ onBook }) {
       <section className="wl-feature" id="skinny-spray">
         <div className="wl-feature-grid">
           <div className="wl-feature-media" data-reveal>
-            <Placeholder className="ph-arch" label="Skinny Spray &amp; Cream" style={{ minHeight: 380 }} />
+            <Photo src="/assets/wl-skinny-spray.png" alt="Skinny Spray &amp; Cream" className="arch" style={{ height: 420 }} />
           </div>
           <div className="wl-feature-body" data-reveal>
             <div className="eyebrow"><span className="bar" />Daily Support</div>
