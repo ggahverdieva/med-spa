@@ -67,7 +67,7 @@ export default function WeightLoss({ onBook }) {
             </div>
           </div>
           <div className="hero-media" data-reveal>
-            <Photo src="/assets/wl-hero.png" alt="Transform your body with effective weight loss strategies" className="arch" style={{ height: 560 }} />
+            <Photo src="/assets/wl-hero.png" alt="Transform your body with effective weight loss strategies" className="arch wl-hero-photo" />
             <div className="hero-float">
               <span className="ic">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 11c0 5.5-7 10-7 10z" /></svg>

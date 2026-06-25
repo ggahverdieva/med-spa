@@ -16,8 +16,10 @@ export default function App() {
   const [legal, setLegal] = useState(null)
   const openBooking = () => setBooking(true)
 
+  // overflow-x: clip (not hidden) contains the decorative glows without
+  // creating a scroll container — which would disable position: sticky
   return (
-    <div ref={ref} style={{ overflowX: 'hidden' }}>
+    <div ref={ref} style={{ overflowX: 'clip' }}>
       <Header onBook={openBooking} />
 
       {path === '/medical-weight-loss'

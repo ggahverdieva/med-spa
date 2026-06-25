@@ -20,7 +20,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; font-family: var(--font); color: var(--ink); background: #fff; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+body { margin: 0; font-family: var(--font); color: var(--ink); background: #fff; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: rgba(3, 166, 195, 0.22); }
@@ -190,7 +190,7 @@ a { color: inherit; text-decoration: none; }
 .member-card h2 { font-weight: 800; font-size: 44px; line-height: 1.12; letter-spacing: -0.025em; margin: 16px 0; color: #fff; }
 .member-card p { font-size: 18px; line-height: 1.6; opacity: .95; margin: 0 0 32px; }
 .member-actions { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
-.btn-white { display: inline-block; background: #fff; color: var(--teal); font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 980px; transition: transform .3s, box-shadow .3s; }
+.btn-white { display: inline-block; background: #fff; color: var(--teal); font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 980px; border: none; font-family: inherit; cursor: pointer; transition: transform .3s, box-shadow .3s; }
 .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
 
 /* ===== JOURNEY ===== */
@@ -308,6 +308,16 @@ a { color: inherit; text-decoration: none; }
 .wl-actions { display: flex; gap: 18px; align-items: center; margin-top: 34px; flex-wrap: wrap; }
 .wl-buys { gap: 14px; }
 .wl-hero .hero-media { position: relative; }
+/* hero photo sizing — mirrors the homepage hero across breakpoints */
+.wl-hero-photo { height: 560px; }
+@media (max-width: 1080px) { .wl-hero-photo { height: 500px; } }
+@media (max-width: 640px) {
+  .wl-hero-photo { height: 240px; }
+  .wl-hero .hero-media .wl-hero-photo { border-radius: 180px 180px 20px 20px; }
+  .wl-hero-photo img { object-position: 50% 38%; }
+  .wl-hero .hero-float { display: none; }
+}
+@media (max-width: 640px) and (max-height: 700px) { .wl-hero-photo { height: 178px; } }
 
 /* spotlight section punch lines (white text on the teal gradient) */
 .wl-punch { font-size: 19px; font-weight: 800; color: #fff; margin: 22px 0 0; }
@@ -320,7 +330,10 @@ a { color: inherit; text-decoration: none; }
 .wl-feature.alt { background: var(--bg); }
 .wl-feature-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 60px; align-items: start; }
 .wl-feature-grid.flip .wl-feature-media { order: 2; }
-.wl-feature-media { position: sticky; top: 90px; }
+/* image pins while its program's text is read, then releases at the section
+   end (the grid is its containing block; align-self:start keeps it short so
+   there is room to stick). top clears the sticky nav. */
+.wl-feature-media { position: sticky; top: 88px; align-self: start; }
 .wl-feature-media .ph { min-height: 440px; }
 .wl-feature-body .eyebrow { margin-bottom: 0; }
 .wl-feature-body h2 { font-weight: 800; font-size: 38px; line-height: 1.14; letter-spacing: -0.025em; margin: 16px 0 0; }
@@ -349,7 +362,12 @@ a { color: inherit; text-decoration: none; }
 .wl-close { background: #fff; padding: 96px var(--pad) 100px; }
 .wl-close .services-head { max-width: 680px; margin: 0 auto; text-align: center; }
 .wl-close .services-head p { font-size: 17px; line-height: 1.6; color: var(--gray); margin: 18px auto 0; max-width: 560px; }
-.wl-close-grid { margin-top: 56px; }
+/* three items, centered as a group (homepage value-grid is 4-col) */
+.value-grid.wl-close-grid { grid-template-columns: repeat(3, 1fr); max-width: 840px; margin-top: 56px; }
+@media (max-width: 640px) {
+  .value-grid.wl-close-grid { grid-template-columns: 1fr; gap: 40px 0; max-width: 360px; }
+  .value-grid.wl-close-grid .value-item { border-right: none; }
+}
 .wl-close-cta { display: flex; gap: 20px; align-items: center; justify-content: center; margin-top: 54px; flex-wrap: wrap; }
 
 @media (max-width: 1080px) {
@@ -367,11 +385,33 @@ a { color: inherit; text-decoration: none; }
   .wl-feature-media .ph { min-height: 300px !important; }
 }
 @media (max-width: 560px) {
-  .wl-hero h1 { font-size: 34px; }
-  .wl-sub { font-size: 18px; }
-  .wl-feature-body h2 { font-size: 26px; }
   .wl-feature-body p, .wl-bullets li { font-size: 15.5px; }
   .wl-pricebox { padding: 22px 20px; }
+}
+
+/* ---- MOBILE: cap every heading to ~3 lines on any width, and keep all
+   content (text, images, video, price rows, buttons) inside the screen ---- */
+@media (max-width: 768px) {
+  /* fluid headings — scale with the viewport, capped near the desktop size */
+  .wl-hero h1 { font-size: clamp(22px, 6.4vw, 40px); line-height: 1.12; }
+  .wl-sub { font-size: clamp(15px, 4.3vw, 20px); }
+  .wl-feature-body h2,
+  .wl .welcome h2,
+  .wl .spotlight h2,
+  .wl .testi-head h2,
+  .wl-menu-head .h2,
+  .wl-close .h2,
+  .wl .member-card h2 { font-size: clamp(20px, 5.4vw, 34px); line-height: 1.18; }
+
+  /* never let a long word/url push past the edge */
+  .wl h1, .wl h2, .wl h3, .wl p, .wl a, .wl li { overflow-wrap: break-word; }
+
+  /* media + boxes stay within the device width */
+  .wl img, .wl .wl-photo, .wl .wl-video, .wl .wl-pricebox { max-width: 100%; }
+  .wl-hero .hero-stats { flex-wrap: wrap; }
+  .wl-hero .hero-stats, .wl-hero .hero-stats > div, .wl-pricelist li { min-width: 0; }
+
+  /* stack price rows + buttons so they can't overflow horizontally */
   .wl-pricelist li { flex-direction: column; gap: 2px; }
   .wl-pricelist .amt { text-align: left; }
   .wl-actions .btn-teal, .wl-actions .btn-gold, .wl-buys .btn-gold { width: 100%; text-align: center; }
